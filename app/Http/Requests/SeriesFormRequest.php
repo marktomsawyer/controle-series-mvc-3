@@ -19,21 +19,12 @@ class SeriesFormRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array
      */
     public function rules()
     {
         return [
-            'nome' => 'required|min:3|max:255',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            //'nome.required' => 'O campo nome é obrigatório',
-            //'nome.min' => 'O campo nome deve ter no mínimo :min caracteres',
-            //'nome.max' => 'O campo nome deve ter no máximo :max caracteres',
+            'nome' => ['required', 'min:2'],
         ];
     }
 }

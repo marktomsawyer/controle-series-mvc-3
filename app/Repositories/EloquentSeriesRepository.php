@@ -2,29 +2,25 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\SeriesFormRequest;
+use App\Models\Episode;
 use App\Models\Season;
 use App\Models\Series;
-use App\Models\Episode;
 use Illuminate\Support\Facades\DB;
-use App\Repositories\SeriesRepository;
-use App\Http\Requests\SeriesFormRequest;
 
-
-class EloquentSeriesRepository implements SeriesRepository{
-
-    public function add(SeriesFormRequest $request): Series {
-
-        return  DB::transaction(function () use ($request) {
+class EloquentSeriesRepository implements SeriesRepository
+{
+    public function add(SeriesFormRequest $request): Series
+    {
+        return DB::transaction(function () use ($request) {
             $serie = Series::create($request->all());
-
             $seasons = [];
             for ($i = 1; $i <= $request->seasonsQty; $i++) {
                 $seasons[] = [
                     'series_id' => $serie->id,
-                    'number' => $i
+                    'number' => $i,
                 ];
             }
-
             Season::insert($seasons);
 
             $episodes = [];
@@ -40,8 +36,5 @@ class EloquentSeriesRepository implements SeriesRepository{
 
             return $serie;
         });
-
-
     }
 }
-

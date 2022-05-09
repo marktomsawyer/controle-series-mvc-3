@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Series extends Model
 {
     use HasFactory;
-
     protected $fillable = ['nome'];
-    //protected $with = ['seasons']; // Já trás todas as temporadas da série
-
 
     public function seasons()
     {
@@ -21,8 +18,8 @@ class Series extends Model
 
     protected static function booted()
     {
-        self::addGlobalScope('ordered', function (Builder $builder) {
-            $builder->orderBy('nome');
+        self::addGlobalScope('ordered', function (Builder $queryBuilder) {
+            $queryBuilder->orderBy('nome');
         });
     }
 }
