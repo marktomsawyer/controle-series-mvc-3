@@ -12,6 +12,10 @@
             <label for="password" class="form-label">Senha</label>
             <input type="password" name="password" id="password" class="form-control">
 
+            <label for="password_confirmation" class="form-label">Confirmação de senha</label>
+            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
+
+
         </div>
 
         <button class="btn btn-primary mt-3">Registrar</button>

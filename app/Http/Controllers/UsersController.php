@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UsersFormRequest;
 
 class UsersController extends Controller
 {
@@ -14,7 +14,7 @@ class UsersController extends Controller
         return view('users.create');
     }
 
-    public function store(Request $request)
+    public function store(UsersFormRequest $request)
     {
         $data = $request->except('_token');
         $data['password'] = Hash::make($data['password']);

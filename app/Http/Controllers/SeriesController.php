@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Series;
 use Illuminate\Http\Request;
+use App\Http\Middleware\Autenticador;
 use App\Repositories\SeriesRepository;
 use App\Http\Requests\SeriesFormRequest;
 
@@ -12,6 +13,7 @@ class SeriesController extends Controller
 {
     public function __construct(private SeriesRepository $repository)
     {
+        $this->middleware(Autenticador::class)->except('index');
     }
 
     public function index(Request $request)
